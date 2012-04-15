@@ -1,0 +1,87 @@
+The GTango Project
+##################
+
+State :
+=======
+Proof of concept
+
+Description :
+=============
+A Groovy Binding for the Tango Control System
+ 
+Binding Tango :
+===============
+- DeviceServer.groovy = Groovy Server for Tango Device Server (tango-controls.org)
+- DeviceServerProxy = A groovy client for Tango
+- RestTangoServer = An HTTP REST Server for Tango 
+- RestTangoClient = A groovy client for REST Tango Server
+
+HTTP Server for Tango :
+=======================
+This application serves any Tango Control System as an HTTP Server.
+Based on REST, only few requests are necessary
+ - read attribute = (GET)
+ - write attribute = (PUT)
+ - add properties (POST)
+ - delete properties (DELETE)
+ - execute commands (GET with parameters)
+
+For example, you can access a device's attrbute by typing http://localhost:8182/devices/sys/tg_test/1/string_scalar into your favorite browser
+
+Launch the server
+-----------------
+1. Build the project (see BUILD Section)
+2. get the jar GTango jar (locate in the target dir) 
+=> just type java -jar GTango-1.0.0-SNAPSHOT.jar --help
+
+
+BUILD
+=====
+Prerequisite :
+--------------
+* Maven 3 
+
+Settings :
+----------
+In your settings.xml, put these repositories :
+        <profile>
+            <id>soleil</id>
+            <repositories>
+                <repository>
+                    <id>other</id>
+                    <url>https://oss.sonatype.org/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>JBoss</id>
+                    <name>jboss-maven2-release-repository</name>
+                    <url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </releases>
+                </repository>
+                
+                <repository>
+                    <id>releases</id>
+                    <url>http://www2.synchrotron-soleil.fr/controle/maven2/soleil</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+Command :
+---------
+Launch "mvn clean package"
